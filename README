@@ -1,0 +1,87 @@
+PROJECT: Fix Preserve 
+		 [Fix ownership and permission if you forgot to preserve]
+CONTENT: A bash script
+AUTHOR:  Names in the accompanied AUTHORS.txt
+LICENSE: The MIT License
+
+
+QUICK SHORT DESCRIPTION:
+fxpres is a bash script that copies ownership and permission of a 
+set of files and applies the same to another set of files.
+Contents of the files are not changed.
+
+USAGE:
+	 fxpres <src or model directory> <destination directory>
+
+	eg:
+	 fxpres /ubuntu10.10/usr/bin /usr/bin
+
+	<Read below for further explanation>
+
+DETAILED DESCRIPTION:
+Ownership and permission of files in the model directory are 
+copied to the files (with the same name) in the destination 
+directory. 
+
+NOTE: 
+* File contents in the destination directory remain unchanged.
+* Only the files with the same name in both 
+  directories (source or model directory and destination directory) 
+  are operated on, others are ignored.
+
+WHAT DOES THIS EXAMPLE COMMAND DO ?
+
+fxpres /ubuntu10.10/usr/bin /usr/bin
+
+--------------------------------
+say, BEFORE running the script, 
+Following files exist in the model (or source) directory:
+-rwxr-sr-x 1 root utmp 340604 2010-06-18 22:42 /ubuntu10.10/usr/bin/screen
+-rwsr-xr-x 1 test test 10     2010-06-18 22:42 /ubuntu10.10/usr/bin/test
+
+and, these files exist in the destination directory:
+-rwxr-xr-x 1 root root 340604 2010-06-18 22:42 /usr/bin/screen
+-rwxr-xr-x 1 root root 10     2010-06-18 22:42 /usr/bin/test
+-rwxr-xr-x 1 root root 42752  2010-06-18 22:42 /usr/bin/at
+
+Note the differences between 'screen' and 'test' files:
+* Their owner and groups are different
+* Their setuid and setgid permissions are different
+
+---------------------------------
+
+AFTER running the script:
+Following files exist in the model (or source) directory:
+-rwxr-sr-x 1 root utmp 340604 2010-06-18 22:42 /ubuntu10.10/usr/bin/screen
+-rwsr-xr-x 1 test test 10     2010-06-18 22:42 /ubuntu10.10/usr/bin/test
+
+and, these files exist in the destination directory:
+-rwxr-sr-x 1 root utmp 340604 2010-06-18 22:42 /usr/bin/screen <= CHANGED: Ownership+Perm.
+-rwsr-xr-x 1 test test 10     2010-06-18 22:42 /usr/bin/test   <= CHANGED: Ownership+Perm. 
+-rwxr-xr-x 1 root root 42752  2010-06-18 22:42 /usr/bin/at     <= UNCHANGED/IGNORED
+
+NOTE: File 'at' is ignored because it exists only in one of the directory.
+
+-----------------------------------
+
+HISTORY:
+Every good story has a history - a rich background.
+
+Need for writing this short script came about when I moved
+my /usr partition to a larger partition upon facing a space
+crunch. Although I preserved the links, I forgot to preserve
+ownership and permission and had to write this short script.
+That in part explains the name of this script/project.
+
+IMPROVEMENTS:
+Although the current incarnation of this script is sufficient
+for my need it runs very slow and I'm sure there are neater ways 
+to improve it's efficiency. You are most welcome to improve
+(or make attempts).
+
+
+====================
+END OF README
+====================
+
+
