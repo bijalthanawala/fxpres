@@ -1,5 +1,6 @@
 PROJECT: Fix Preserve 
-         [Fix ownership and permissions if you forgot to preserve]
+         Fix ownership and permissions if you forgot to preserve 
+		 while copying
 CONTENT: A bash script
 AUTHOR:  Names in the accompanied AUTHORS.txt
 LICENSE: The MIT License
@@ -74,18 +75,22 @@ ownership and permission and had to write this short script.
 That in part explains the name of this script/project.
 
 IMPROVEMENTS:
-Although the current incarnation of this script is sufficient
-for my need, I'm sure there are neater ways to improve it's 
-efficiency. You are most welcome to improve (or make attempts).
-
 Read WISHLIST file
 
 
+**********************************************************************
 **																	**
-** IMPORTANT: Read and understand any open critical bugs mentioned	**
-** in BUGS file before using. 										**
+** IMPORTANT:														**
 **																	**
-
+** BEFORE USING														**
+**																	**
+** Read and understand any open critical bugs mentioned				**
+** in BUGS file.			 										**
+**																	**
+** Note the order of model directory and the target directory on 	**
+** the command line in the USAGE section							**
+**																	**
+**********************************************************************
 
 ====================
 END OF README

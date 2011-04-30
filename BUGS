@@ -3,8 +3,9 @@ PROJECT: Fix Preserve
          [Fix ownership and permissions if you forgot to preserve]
 
 1 SYMBOLIC LINKS
-  CRITICAL
-  STATUS:	Open
-  CAUSE:	Symbolic links v/s a regular file with the same name may not
-            get handled as expected.
-  POSSIBLE FIX:  Ignore such mismatch and do not launch chmod.
+  LEVEL: 		CRITICAL
+  STATUS:		Open
+  DESCRIPTION:	Symbolic links v/s a regular file with the same name may not
+            	get handled as expected.
+  POSSIBLE FIX: Ignore such mismatch and do not launch chmod.
+

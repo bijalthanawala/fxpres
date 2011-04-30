@@ -15,3 +15,5 @@ WISHLIST:
    Perhaps store previous ownership/permissions
    before changing. Read and undo upon request.
 
+4) Recurse through sub-directory
+
