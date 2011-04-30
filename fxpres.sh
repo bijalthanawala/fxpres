@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #####################################################################
 # PROJECT: Fix Preserve 
 #          [Fix ownership and permission if you forgot to preserve]
@@ -31,6 +33,10 @@ function usage() {
 	echo "fxpres /ubuntu10.10/usr/bin /usr/bin";
 }
 
+OFF_PERM=0;
+OFF_GID=1;
+OFF_UID=2;
+
 dirtomodel=$1
 dirtofix=$2
 
@@ -44,22 +50,27 @@ if [ ! -d $dirtofix -o ! -d $dirtomodel ]; then
 	exit 1;
 fi	
 
+echo "Following files will be fixed:"
 for fn in $dirtofix/*; do 
-   badgrp=$(stat -c%G $fn); 
-   badusr=$(stat -c%U $fn);
+
    filemodel=$dirtomodel/$(basename $fn); 
    if [ -e $filemodel ] ; then 
-   	goodgrp=$(stat -c%G $filemodel); 
-	goodusr=$(stat -c%U $filemodel);
-	if [ "$badgrp" != "$goodgrp" ] ; then
-		#echo $filemodel $fn $badgrp $goodgrp;   
-    	ls -la $filemodel
-		ls -la $fn
-	fi;
-	if [ "$badusr" != "$goodusr" ] ; then
-		#echo $filemodel $fn $badusr $goodusr;   
-    	ls -la $filemodel
-		ls -la $fn
-    fi;
+
+		stattofix=($(stat -c'%a %g %u' $fn));
+		permtofix=${stattofix[$OFF_PERM]};
+	   	grptofix=${stattofix[$OFF_GID]};
+	   	usrtofix=${stattofix[$OFF_UID]};
+
+		stattomodel=($(stat -c'%a %g %u' $filemodel));
+		permtomodel=${stattomodel[$OFF_PERM]};
+	   	grptomodel=${stattomodel[$OFF_GID]};
+	   	usrtomodel=${stattomodel[$OFF_UID]};
+
+		if [ "$permtofix" != "$permtomodel" -o \
+			"$grptofix" != "$grptomodel" -o \
+		    "$usrtofix" != "$usrtomodel" ] ; then
+    		ls -la $filemodel
+			ls -la $fn
+		fi;
    fi;  
 done 
