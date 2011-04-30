@@ -24,6 +24,16 @@
 
 set +x
 
+#######################################
+# Constants
+#######################################
+OFF_PERM=0;
+OFF_GID=1;
+OFF_UID=2;
+
+#######################################
+# Support functions
+#######################################
 function usage() {
 	echo "";
 	echo "USAGE:";
@@ -33,13 +43,15 @@ function usage() {
 	echo "fxpres /ubuntu10.10/usr/bin /usr/bin";
 }
 
-OFF_PERM=0;
-OFF_GID=1;
-OFF_UID=2;
+
+#######################################
+# Script begins here
+#######################################
 
 dirtomodel=$1
 dirtofix=$2
 
+# Checking parameters and validity
 if [ "$dirtofix" == "" -o "$dirtomodel" == "" ] ; then
 	usage;
 	exit 1;
@@ -50,12 +62,24 @@ if [ ! -d $dirtofix -o ! -d $dirtomodel ]; then
 	exit 1;
 fi	
 
-for fn in $dirtofix/*; do 
 
-   filemodel=$dirtomodel/$(basename $fn); 
+# For each file in the target directory
+for filefix in $dirtofix/*; do 
+
+   filemodel=$dirtomodel/$(basename $filefix); 
+	
+   #Only if a file with the same name exist in the model 
+   #directory
    if [ -e $filemodel ] ; then 
 
-		stattofix=($(stat -c'%a %g %u' $fn));
+		#Ignore if either is a symbolic link
+		if [ -L $filefix -o \
+			 -L $filemodel ] ; then
+			continue;
+		fi
+
+		#Gather file information
+		stattofix=($(stat -c'%a %g %u' $filefix));
 		permtofix=${stattofix[$OFF_PERM]};
 	   	grptofix=${stattofix[$OFF_GID]};
 	   	usrtofix=${stattofix[$OFF_UID]};
@@ -65,15 +89,18 @@ for fn in $dirtofix/*; do
 	   	grptomodel=${stattomodel[$OFF_GID]};
 	   	usrtomodel=${stattomodel[$OFF_UID]};
 
+		#Check if ownership is different, and take action
 		if [ "$grptofix" != "$grptomodel" -o \
 		     "$usrtofix" != "$usrtomodel" ] ; then
-			 	#ls -la $filemodel $fn
-				chown --reference=$filemodel $fn;
+			 	#ls -la $filemodel $filefix
+				chown --reference=$filemodel $filefix;
 		fi;
 		
+		#Check if permission is different, and take action
 		if [ "$permtofix" != "$permtomodel" ] ; then
-				#ls -la $filemodel $fn
-				chmod --reference=$filemodel $fn;
+				#ls -la $filemodel $filefix
+				chmod --reference=$filemodel $filefix;
 		fi;
    fi;  
 done 
+
