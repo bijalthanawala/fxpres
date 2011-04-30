@@ -1,0 +1,17 @@
+PROJECT: Fix Preserve 
+         [Fix ownership and permissions if you forgot to preserve]
+
+
+WISHLIST:
+
+1) Verbose mode
+   Besides scripts own, enable the same of chmod/chown.
+
+2) Dry mode
+   Only shows what changes would be made, without actually 
+   making those.
+
+3) Ability to undo changes
+   Perhaps store previous ownership/permissions
+   before changing. Read and undo upon request.
+

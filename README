@@ -1,5 +1,5 @@
 PROJECT: Fix Preserve 
-		 [Fix ownership and permission if you forgot to preserve]
+         [Fix ownership and permissions if you forgot to preserve]
 CONTENT: A bash script
 AUTHOR:  Names in the accompanied AUTHORS.txt
 LICENSE: The MIT License
@@ -75,9 +75,16 @@ That in part explains the name of this script/project.
 
 IMPROVEMENTS:
 Although the current incarnation of this script is sufficient
-for my need it runs very slow and I'm sure there are neater ways 
-to improve it's efficiency. You are most welcome to improve
-(or make attempts).
+for my need, I'm sure there are neater ways to improve it's 
+efficiency. You are most welcome to improve (or make attempts).
+
+Read WISHLIST file
+
+
+**																	**
+** IMPORTANT: Read and understand any open critical bugs mentioned	**
+** in BUGS file before using. 										**
+**																	**
 
 
 ====================

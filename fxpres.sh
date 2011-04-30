@@ -2,7 +2,7 @@
 
 #####################################################################
 # PROJECT: Fix Preserve 
-#          [Fix ownership and permission if you forgot to preserve]
+#          [Fix ownership and permissions if you forgot to preserve]
 # CONTENT: A bash script
 # AUTHOR:  Names in the accompanied AUTHORS.txt
 # LICENSE: The MIT License
@@ -50,7 +50,6 @@ if [ ! -d $dirtofix -o ! -d $dirtomodel ]; then
 	exit 1;
 fi	
 
-echo "Following files will be fixed:"
 for fn in $dirtofix/*; do 
 
    filemodel=$dirtomodel/$(basename $fn); 
@@ -66,11 +65,15 @@ for fn in $dirtofix/*; do
 	   	grptomodel=${stattomodel[$OFF_GID]};
 	   	usrtomodel=${stattomodel[$OFF_UID]};
 
-		if [ "$permtofix" != "$permtomodel" -o \
-			"$grptofix" != "$grptomodel" -o \
-		    "$usrtofix" != "$usrtomodel" ] ; then
-    		ls -la $filemodel
-			ls -la $fn
+		if [ "$grptofix" != "$grptomodel" -o \
+		     "$usrtofix" != "$usrtomodel" ] ; then
+			 	#ls -la $filemodel $fn
+				chown --reference=$filemodel $fn;
+		fi;
+		
+		if [ "$permtofix" != "$permtomodel" ] ; then
+				#ls -la $filemodel $fn
+				chmod --reference=$filemodel $fn;
 		fi;
    fi;  
 done 
