@@ -4,7 +4,7 @@ PROJECT: Fix Preserve
 
 1 SYMBOLIC LINKS
   LEVEL: 		CRITICAL
-  STATUS:		Open
+  STATUS:		FIXED
   DESCRIPTION:	Symbolic links v/s a regular file with the same name may not
             	get handled as expected.
   POSSIBLE FIX: Ignore such mismatch and do not launch chmod.
