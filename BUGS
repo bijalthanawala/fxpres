@@ -2,7 +2,14 @@
 PROJECT: Fix Preserve 
          [Fix ownership and permissions if you forgot to preserve]
 
-1 SYMBOLIC LINKS
+- STICKY BITS
+  LEVEL:		NOT CRITICAL
+  STATUS:		FIXED
+  DESCRIPTION:	Sticky bits on files are completely ignored.
+  POSSIBLE FIX: Haven't given enough thought and research of possible
+  				scenarios and fixes
+
+- SYMBOLIC LINKS
   LEVEL: 		CRITICAL
   STATUS:		FIXED
   DESCRIPTION:	Symbolic links v/s a regular file with the same name may not
