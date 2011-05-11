@@ -7,7 +7,7 @@ LICENSE: The MIT License
 
 
 QUICK SHORT DESCRIPTION:
-fxpres is a bash script that copies ownership and permission of a 
+fxpres is a bash script that copies ownership and permissions of a 
 set of files and applies the same to another set of files.
 Contents of the files are not changed.
 
@@ -78,19 +78,19 @@ IMPROVEMENTS:
 Read WISHLIST file
 
 
-**********************************************************************
-**																	**
-** IMPORTANT:														**
-**																	**
-** BEFORE USING														**
-**																	**
-** Read and understand any open critical bugs mentioned				**
-** in BUGS file.			 										**
-**																	**
-** Note the order of model directory and the target directory on 	**
-** the command line in the USAGE section							**
-**																	**
-**********************************************************************
+************************************************************************
+***                                                                  ***
+*** IMPORTANT:                                                       ***
+***                                                                  ***
+*** BEFORE USING                                                     ***
+***                                                                  ***
+*** => Read and understand any open critical bugs mentioned          ***
+***    in BUGS file.                                                 ***
+***                                                                  ***
+*** => Note the order of model directory and the target directory on ***
+***    the command line in the USAGE section                         ***
+***                                                                  ***
+************************************************************************
 
 ====================
 END OF README

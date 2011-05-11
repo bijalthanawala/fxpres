@@ -2,12 +2,6 @@
 PROJECT: Fix Preserve 
          [Fix ownership and permissions if you forgot to preserve]
 
-- STICKY BITS
-  LEVEL:		NOT CRITICAL
-  STATUS:		FIXED
-  DESCRIPTION:	Sticky bits on files are completely ignored.
-  POSSIBLE FIX: Haven't given enough thought and research of possible
-  				scenarios and fixes
 
 - SYMBOLIC LINKS
   LEVEL: 		CRITICAL

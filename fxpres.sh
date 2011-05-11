@@ -9,7 +9,7 @@
 #
 #
 # QUICK SHORT DESCRIPTION:
-# fxpres is a bash script that copies ownership and permission of a 
+# fxpres is a bash script that copies ownership and permissions of a 
 # set of files and applies the same to another set of files.
 # Contents of the files are not changed.
 #
